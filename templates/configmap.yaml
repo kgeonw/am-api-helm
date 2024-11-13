@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "asset-manager-api.fullname" . }}
+  labels:
+    app: {{ include "asset-manager-api.name" . }}
+    release: {{ .Release.Name }}
+data:
+  # JWT 설정
+  JWT_KEY: {{ .Values.jwt.key | quote }}
+  JWT_ACCESS_TOKEN_EXPIRATION: "{{ .Values.jwt.accessTokenExpiration }}"
+  JWT_REFRESH_TOKEN_EXPIRATION: "{{ .Values.jwt.refreshTokenExpiration }}"
+
+  # Spring 데이터베이스 설정
+  SPRING_DATASOURCE_URL: {{ .Values.spring.datasource.url | quote }}
+  SPRING_DATASOURCE_USERNAME: {{ .Values.spring.datasource.username | quote }}
+  SPRING_DATASOURCE_PASSWORD: {{ .Values.spring.datasource.password | quote }}
+
+  # Spring JPA 설정
+  SPRING_JPA_HIBERNATE_DDL_AUTO: {{ .Values.spring.jpa.hibernate.ddlAuto | quote }}
+  SPRING_JPA_SHOW_SQL: "{{ .Values.spring.jpa.showSql }}"
+  SPRING_JPA_HIBERNATE_DIALECT: {{ .Values.spring.jpa.properties.hibernate.dialect | quote }}
