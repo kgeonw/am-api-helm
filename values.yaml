@@ -57,7 +57,8 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 80            # 외부에서 접근할 EXPOSE 포트
+  targetPort: 8080      # 컨테이너 내부의 실제 포트
 
 ingress:
   enabled: true
