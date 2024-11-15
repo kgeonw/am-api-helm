@@ -6,7 +6,8 @@ replicaCount: 1
 
 image:
   repository: asia-northeast3-docker.pkg.dev/split-dev-436906/an3-dev-split-registry/split_assetmanager_api
-  pullPolicy: IfNotPresent
+#  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: 0.0.1
 
@@ -57,7 +58,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80            # 외부에서 접근할 EXPOSE 포트
+  port: 80          # 외부에서 접근할 EXPOSE 포트
   targetPort: 8080      # 컨테이너 내부의 실제 포트
 
 ingress:
