@@ -40,14 +40,20 @@ spec:
             - name: http
               containerPort: {{ .Values.service.targetPort }} # 내부 실제 포트 (8080)
               protocol: TCP
-{{/*          livenessProbe:*/}}
-{{/*            httpGet:*/}}
-{{/*              path: /*/}}
-{{/*              port: http*/}}
-{{/*          readinessProbe:*/}}
-{{/*            httpGet:*/}}
-{{/*              path: /*/}}
-{{/*              port: http*/}}
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 200
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 600
+            periodSeconds: 5
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
