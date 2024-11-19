@@ -68,7 +68,7 @@ ingress:
      kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: asset-manager-api.spl-it.net
+    - host: asset-manager-api-dev.spl-it.net
       paths:
         - path: /
           pathType: ImplementationSpecific
